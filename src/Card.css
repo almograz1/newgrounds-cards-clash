@@ -1,0 +1,59 @@
+/* src/Card.css */
+
+.card {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: #f5f5f5; /* Light gray background */
+    border: 2px solid #333; /* Dark border */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+}
+
+/* Styling for each value displayed on the card */
+.value {
+    position: absolute;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333; /* Dark text */
+}
+
+.top {
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.left {
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.right {
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.bottom {
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Styling for player ownership */
+.card.blue {
+    background-color: #a0d2eb; /* Light blue background for blue player */
+    border-color: #00509e; /* Darker blue border */
+}
+
+.card.red {
+    background-color: #f5a4a4; /* Light red background for red player */
+    border-color: #d62828; /* Darker red border */
+}
