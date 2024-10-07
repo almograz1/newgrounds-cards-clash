@@ -7,15 +7,26 @@
   margin-top: 20px;
 }
 
+.game-container {
+  display: flex;
+  justify-content: space-between; /* Ensure children are spaced evenly */
+  align-items: center; /* Align items vertically at the center */
+  width: 100%; /* Take full width of the page */
+  padding: 20px;
+}
+
+/* Styles for the board container */
 .board {
   display: flex;
   flex-direction: column; /* Align rows vertically */
   justify-content: center;
   align-items: center;
+  margin: 0 20px; /* Add space between the board and player cards */
 }
 
+/* Styles for each row of the board */
 .row {
-  display: flex; /* Align cells in a row horizontally */
+  display: flex; /* Align cells horizontally */
 }
 
 .cell {
@@ -27,9 +38,31 @@
   align-items: center;
   background-color: #f9f9f9;
   margin: 5px;
+  cursor: pointer; /* Pointer cursor for interactivity */
 }
 
 .cell:hover {
   background-color: #e0e0e0; /* Highlight on hover */
 }
 
+/* Styles for players' card containers */
+.players-cards-container {
+  width: 200px; /* Set fixed width for the player card container */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
+
+/* Player-specific styling */
+.red-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blue-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

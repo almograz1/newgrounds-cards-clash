@@ -1,28 +1,38 @@
 import React, { useState } from 'react';
-import './App.css'; // Make sure you have styles for .App and .board
-import Card from './Card'; // Import the Card component
+import './App.css';
+import Card from './Card'; // Assuming you have a Card component and its styles
 
 function App() {
-    // Define a 3x3 board where each cell can hold a card object or be null (empty)
+    // Define the board state
     const [board, setBoard] = useState([
-        [
-            { top: 5, left: 2, right: 3, bottom: 4, owner: 'blue' }, // Card in position (0, 0)
-            null, // Empty cell
-            { top: 7, left: 1, right: 9, bottom: 6, owner: 'red' },  // Card in position (0, 2)
-        ],
-        [
-            null, // Empty cell
-            { top: 4, left: 5, right: 2, bottom: 8, owner: 'blue' }, // Card in position (1, 1)
-            null, // Empty cell
-        ],
-        [
-            null, // Empty cell
-            null, // Empty cell
-            null, // Empty cell
-        ]
+        [null, null, null],
+        [null, null, null],
+        [null, null, null],
     ]);
 
-    // Function to render a Card component if a card exists in the cell
+    // Cards for each player
+    const [redPlayerCards] = useState([
+        { top: 2, left: 4, right: 3, bottom: 5, owner: 'red' },
+        { top: 6, left: 5, right: 7, bottom: 1, owner: 'red' },
+    ]);
+
+    const [bluePlayerCards] = useState([
+        { top: 8, left: 3, right: 4, bottom: 2, owner: 'blue' },
+        { top: 1, left: 7, right: 6, bottom: 5, owner: 'blue' },
+    ]);
+
+    // Track the currently selected card and player turn
+    const [selectedCard, setSelectedCard] = useState(null);
+    const [currentPlayer, setCurrentPlayer] = useState('red'); // 'red' starts the game
+
+    // Function to handle card selection
+    const handleCardClick = (card, player) => {
+        if (player === currentPlayer) {
+            setSelectedCard(card);
+        }
+    };
+
+    // Function to render a card component if a card exists in the cell
     const renderCellContent = (card) => {
         if (card) {
             return (
@@ -42,17 +52,52 @@ function App() {
     return (
         <div className="App">
             <h1>3x3 Card Game Board</h1>
-            <div className="board">
-                {board.map((row, rowIndex) => (
-                    <div key={rowIndex} className="row">
-                        {row.map((cell, colIndex) => (
-                            <div key={colIndex} className="cell">
-                                {/* Render a Card component if a card is present, otherwise render an empty cell */}
-                                {renderCellContent(cell)}
-                            </div>
-                        ))}
-                    </div>
-                ))}
+
+            {/* Game Container to hold the red player, board, and blue player */}
+            <div className="game-container">
+
+                {/* Red Player's Cards Container */}
+                <div className="players-cards-container red-player">
+                    <h2>Red Player's Cards</h2>
+                    {redPlayerCards.map((card, index) => (
+                        <Card
+                            key={index}
+                            top={card.top}
+                            left={card.left}
+                            right={card.right}
+                            bottom={card.bottom}
+                            owner={card.owner}
+                        />
+                    ))}
+                </div>
+
+                {/* Board Container */}
+                <div className="board">
+                    {board.map((row, rowIndex) => (
+                        <div key={rowIndex} className="row">
+                            {row.map((cell, colIndex) => (
+                                <div key={colIndex} className="cell">
+                                    {renderCellContent(cell)}
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+
+                {/* Blue Player's Cards Container */}
+                <div className="players-cards-container blue-player">
+                    <h2>Blue Player's Cards</h2>
+                    {bluePlayerCards.map((card, index) => (
+                        <Card
+                            key={index}
+                            top={card.top}
+                            left={card.left}
+                            right={card.right}
+                            bottom={card.bottom}
+                            owner={card.owner}
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     );
