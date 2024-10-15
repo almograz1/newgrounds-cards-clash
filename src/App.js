@@ -29,7 +29,7 @@ function App() {
 
     // Cards for each player
     const [redPlayerCards, setRedPlayerCards] = useState([
-        { top: 2, left: 4, right: 3, bottom: 5, owner: 'red' },
+        { top: 1, left: 2, right: 3, bottom: 1, owner: 'red' },
         { top: 6, left: 5, right: 7, bottom: 1, owner: 'red' },
     ]);
 
@@ -79,13 +79,14 @@ function App() {
 
     const captureAdjacentCards = (row,col,card) => {
         const directions = [
-            { row: -1, col: 0, checkValue: 'bottom', compareValue: 'top' }, // Up
-            { row: 1, col: 0, checkValue: 'top', compareValue: 'bottom' },   // Down
-            { row: 0, col: -1, checkValue: 'right', compareValue: 'left' },  // Left
-            { row: 0, col: 1, checkValue: 'left', compareValue: 'right' },   // Right
+            { row: -1, col: 0, checkValue: 'top', compareValue: 'bottom' }, // Up
+            { row: 1, col: 0, checkValue: 'bottom', compareValue: 'top' },   // Down
+            { row: 0, col: -1, checkValue: 'left', compareValue: 'right' },  // Left
+            { row: 0, col: 1, checkValue: 'right', compareValue: 'left' },   // Right
         ];
+
         const updatedBoard = [...board];
-        directions.forEach(({ row: rowDir, col: colDir, checkValue, compareValue }) => {
+        for (const { row: rowDir,   col: colDir, checkValue, compareValue } of directions) {
             const newRow = row + rowDir;
             const newCol = col + colDir;
 
@@ -93,7 +94,7 @@ function App() {
             if(newRow >= 0 && newRow < 3 && newCol >= 0 && newCol < 3 ) {
                 const adjacentCard = updatedBoard[newRow][newCol];
 
-                // If there is a card in the adjacent cell and it belongs to the opponent
+                // If there is a card in the adjacent cell, and it belongs to the opponent
                 if(adjacentCard && adjacentCard.owner !== currentPlayer) {
                     // Compare card values based on direction
                     if(card[checkValue] > adjacentCard[compareValue]) {
@@ -101,7 +102,7 @@ function App() {
                     }
                 }
             }
-        });
+        }
         setBoard(updatedBoard); // Update the board with captured cards
     };
 
@@ -109,7 +110,8 @@ function App() {
         <div className="App">
             <h1>3x3 Card Game Board</h1>
 
-            <h2>Current Player: {currentPlayer.toUpperCase()}</h2>
+            <h2>Current Player: <span className={currentPlayer}>{currentPlayer.toUpperCase()}</span>
+            </h2>
 
 
             {/* Game Container to hold the red player, board, and blue player */}
