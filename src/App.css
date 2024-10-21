@@ -2,7 +2,7 @@
 body,html {
   height: 100%;
   margin: 0;
-  background-color: darkslategrey;
+  background-color: #bed3c2
 }
 .App {
 
@@ -52,15 +52,27 @@ body,html {
 }
 
 /* Styles for players' card containers */
-.players-cards-container {
+.players-cards-container.blue-player {
   width: 200px; /* Set fixed width for the player card container */
+  height: 400px;
   padding: 10px;
   border: 1px solid #291616;
   border-radius: 10px;
-  background-color: darkslategrey;
+  background-color: #dbddff;
+  overflow-y: auto;
+
 
 }
+.players-cards-container.red-player {
+  width: 200px; /* Set fixed width for the player card container */
+  height: 400px;
+  padding: 10px;
+  border: 1px solid #291616;
+  border-radius: 10px;
+  background-color: #ffdde1;
+  overflow-y: auto;
 
+}
 
 
 /* Player-specific styling */

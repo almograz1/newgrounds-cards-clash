@@ -26,16 +26,24 @@ function App() {
         );
     };
 
-
+    const randomNumber = () => {
+        return Math.floor(Math.random() * 9) + 1;
+    }
     // Cards for each player
     const [redPlayerCards, setRedPlayerCards] = useState([
-        { top: 1, left: 2, right: 3, bottom: 1, owner: 'red' },
-        { top: 6, left: 5, right: 7, bottom: 1, owner: 'red' },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red' },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red' },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red' },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red' },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red' },
+
     ]);
 
     const [bluePlayerCards, setBluePlayerCards] = useState([
-        { top: 8, left: 3, right: 4, bottom: 2, owner: 'blue' },
-        { top: 1, left: 7, right: 6, bottom: 5, owner: 'blue' },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'blue' },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'blue' },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'blue' },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'blue' },
     ]);
 
     // Track the currently selected card and player turn
@@ -128,6 +136,7 @@ function App() {
                             right={card.right}
                             bottom={card.bottom}
                             owner={card.owner}
+                            isFlipped={currentPlayer === 'blue'}
                         />
                         </div>
                     ))}
@@ -161,6 +170,7 @@ function App() {
                                 right={card.right}
                                 bottom={card.bottom}
                                 owner={card.owner}
+                                isFlipped={currentPlayer === 'red'}
                             />
                         </div>
                     ))}

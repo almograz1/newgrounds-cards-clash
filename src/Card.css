@@ -48,6 +48,12 @@
     transform: translateX(-50%);
 }
 
+.card-back {
+    color: currentColor;
+    font-size: small;
+    text-align: center;
+}
+
 /* Styling for player ownership */
 .card.blue {
     background-color: #a0d2eb; /* Light blue background for blue player */
