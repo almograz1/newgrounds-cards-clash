@@ -47,9 +47,7 @@ body,html {
   cursor: pointer; /* Pointer cursor for interactivity */
 }
 
-.cell:hover {
-  background-color: #e0e0e0; /* Highlight on hover */
-}
+
 
 /* Styles for players' card containers */
 .players-cards-container.blue-player {
