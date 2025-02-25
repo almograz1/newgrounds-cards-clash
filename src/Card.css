@@ -21,7 +21,11 @@
     cursor: pointer;
 }
 
-.card:hover {
+.card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:not(.placed):hover {
     transform: translateX(-13px);
 }
 

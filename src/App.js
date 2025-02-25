@@ -22,6 +22,7 @@ function App() {
                 right={cell.right}
                 bottom={cell.bottom}
                 owner={cell.owner}
+                placed = {true} // indicates a card is placed on the board
             />
         );
     };
