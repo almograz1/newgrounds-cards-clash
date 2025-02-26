@@ -4,6 +4,7 @@ import Card from './Card'; // Assuming you have a Card component and its styles
 
 function App() {
     // Define the board state
+    const[winner, setWinner] = useState(null);
     const [board, setBoard] = useState([
         [null, null, null],
         [null, null, null],
@@ -79,10 +80,15 @@ function App() {
             // Capture adjacent cards based on values
             captureAdjacentCards(rowIndex, colIndex, selectedCard);
 
-            //Reset the selected card and switch turns
-            setSelectedCard(null);
-            setCurrentPlayer(currentPlayer === 'red' ? 'blue' : 'red');
-
+            if(isBoardFull()){
+                const result = determineWinner();
+                setWinner(result);
+            }
+            else{
+                //Reset the selected card and switch turns
+                setSelectedCard(null);
+                setCurrentPlayer(currentPlayer === 'red' ? 'blue' : 'red');
+            }
         }
     };
 
@@ -114,11 +120,35 @@ function App() {
         }
         setBoard(updatedBoard); // Update the board with captured cards
     };
+    const isBoardFull = () => {
+        return board.every(row => row.every(cell => cell !== null)); // Checks if all cells are filled
+    };
+    const determineWinner = () => {
+        let redCount = 0;
+        let blueCount = 0;
+
+        board.forEach(row => {
+            row.forEach(cell => {
+                if (cell) {
+                    if (cell.owner === 'red') redCount++;
+                    else if (cell.owner === 'blue') blueCount++;
+                }
+            });
+        });
+
+        if (redCount > blueCount) {
+            return "Red Player Wins!";
+        } else if (blueCount > redCount) {
+            return "Blue Player Wins!";
+        } else {
+            return "It's a Tie!";
+        }
+    };
 
     return (
         <div className="App">
             <h1>3x3 Card Game Board</h1>
-
+            {winner && <h2 className="winner-message">{winner}</h2>}
             <h2>Current Player: <span className={currentPlayer}>{currentPlayer.toUpperCase()}</span>
             </h2>
 

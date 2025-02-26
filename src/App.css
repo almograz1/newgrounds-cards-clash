@@ -50,38 +50,39 @@ body,html {
 .cell {
   width: 100px;
   height: 100px;
-  border: 1px solid #000; /* Cell border */
+  border-radius: 8px; /* Softened edges */
+  border: 2px solid #888; /* Softer cell border */
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f9f9f9;
   margin: 5px;
   cursor: pointer; /* Pointer cursor for interactivity */
+  transition: all 0.2s ease-in-out;
+}
+.cell:hover {
+  background-color: #e0e0e0; /* Subtle highlight when hovered */
+  transform: scale(1.05); /* Slight scaling effect */
 }
 
 
-
-/* Styles for players' card containers */
-.players-cards-container.blue-player {
-  width: 200px; /* Set fixed width for the player card container */
-  height: 400px;
-  padding: 10px;
-  border: 1px solid #291616;
-  border-radius: 10px;
-  background-color: #dbddff;
+.players-cards-container {
+  width: 220px;
+  height: 450px;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   overflow-y: auto;
-
-
 }
-.players-cards-container.red-player {
-  width: 200px; /* Set fixed width for the player card container */
-  height: 400px;
-  padding: 10px;
-  border: 1px solid #291616;
-  border-radius: 10px;
-  background-color: #ffdde1;
-  overflow-y: auto;
 
+.red-player {
+  background: linear-gradient(to bottom, #ffdddd, #ffbbbb);
+  border: 3px solid #d62828;
+}
+
+.blue-player {
+  background: linear-gradient(to bottom, #ddeeff, #a0d2eb);
+  border: 3px solid #00509e;
 }
 
 
@@ -112,4 +113,11 @@ body,html {
 .red{
   color: red;
   font-weight: bold;
+}
+
+.winner-message {
+  font-size: 25px;
+  font-weight: bold;
+  color:green;
+  margin-top: 20px;
 }
