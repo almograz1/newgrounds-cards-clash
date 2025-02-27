@@ -24,6 +24,7 @@ function App() {
                 bottom={cell.bottom}
                 owner={cell.owner}
                 placed = {true} // indicates a card is placed on the board
+                image = {cell.image}
             />
         );
     };
@@ -33,19 +34,19 @@ function App() {
     }
     // Cards for each player
     const [redPlayerCards, setRedPlayerCards] = useState([
-        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red' },
-        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red' },
-        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red' },
-        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red' },
-        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red' },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red', image: "/cards/images/arnold.png" },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red', image: "/cards/images/dadnme.png" },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red', image: "/cards/images/evelynn.png" },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red', image: "/cards/images/happyfeet.png" },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red', image: "/cards/images/icon.png" },
 
     ]);
 
     const [bluePlayerCards, setBluePlayerCards] = useState([
-        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'blue' },
-        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'blue' },
-        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'blue' },
-        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'blue' },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'blue', image: "/cards/images/pablo.png" },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'blue', image: "/cards/images/ronald.png" },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'blue', image: "/cards/images/smiley.png" },
+        { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'blue', image: "/cards/images/yeledkaka.png" },
     ]);
 
     // Track the currently selected card and player turn
@@ -168,6 +169,7 @@ function App() {
                             bottom={card.bottom}
                             owner={card.owner}
                             isFlipped={currentPlayer === 'blue'}
+                            image = {card.image}
                         />
                         </div>
                     ))}
@@ -202,6 +204,7 @@ function App() {
                                 bottom={card.bottom}
                                 owner={card.owner}
                                 isFlipped={currentPlayer === 'red'}
+                                image = {card.image}
                             />
                         </div>
                     ))}

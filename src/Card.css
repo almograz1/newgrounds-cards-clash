@@ -19,14 +19,28 @@
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
     font-weight: bold;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
     cursor: pointer;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
 }
 
+
+
 .card {
     transition: transform 0.2s ease-in-out;
+}
+
+.card-content{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.card-image {
+    width:100%;
+    height:auto;
+    border-radius: 8px;
 }
 
 .card:not(.placed):hover {
@@ -44,29 +58,59 @@
     color: #333; /* Dark text */
 }
 
-.top {
-    top: 5px;
-    left: 50%;
+.card-values {
+    position: absolute;
+    top:5px;
+    left:5px;
+    background: rgba(0, 0, 0, 0.7); /* Dark background for contrast */
+    color: white;
+    padding: 4px 6px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    aling-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+.card-value {
+    position: absolute;
+}
+
+.card-value.top {
+    position: absolute;
+    top: -7px;
+    left: 61%;
     transform: translateX(-50%);
 }
 
-.left {
-    left: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.right {
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.bottom {
-    bottom: 5px;
-    left: 50%;
+.card-value.bottom {
+    position: absolute;
+    bottom: -23px;
+    left: 61%;
     transform: translateX(-50%);
 }
+
+.card-value.left {
+    position: absolute;
+    left: 0px;
+    top:50%;
+    transform: translateX(-50%);
+}
+
+.card-value.right {
+    position: absolute;
+    right: -11px;
+    top:50%;
+    transform: translateX(-50%);
+}
+
+
+
+
+
 
 .card-back {
     color: currentColor;
