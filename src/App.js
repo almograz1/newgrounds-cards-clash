@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import Card from './Card'; // Assuming you have a Card component and its styles
+import Card from './Card';
 
 function App() {
     // Define the board state
@@ -10,12 +10,11 @@ function App() {
         [null, null, null],
         [null, null, null],
     ]);
+
     // Function to render the content of each cell on the board
     const renderCellContent = (cell) => {
-        // If the cell is empty (null), return nothing (renders an empty cell)
         if (!cell) return null;
 
-        // If the cell contains a card, render the Card component with the card's properties
         return (
             <Card
                 top={cell.top}
@@ -23,8 +22,8 @@ function App() {
                 right={cell.right}
                 bottom={cell.bottom}
                 owner={cell.owner}
-                placed = {true} // indicates a card is placed on the board
-                image = {cell.image}
+                placed={true}
+                image={cell.image}
             />
         );
     };
@@ -32,6 +31,7 @@ function App() {
     const randomNumber = () => {
         return Math.floor(Math.random() * 9) + 1;
     }
+
     // Cards for each player
     const [redPlayerCards, setRedPlayerCards] = useState([
         { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red', image: "/cards/images/arnold.png" },
@@ -39,7 +39,6 @@ function App() {
         { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red', image: "/cards/images/evelynn.png" },
         { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red', image: "/cards/images/happyfeet.png" },
         { top: randomNumber(), left: randomNumber(), right: randomNumber(), bottom: randomNumber(), owner: 'red', image: "/cards/images/icon.png" },
-
     ]);
 
     const [bluePlayerCards, setBluePlayerCards] = useState([
@@ -55,14 +54,14 @@ function App() {
 
     // Function to handle card selection
     const handleCardClick = (card, player) => {
-        if (player === currentPlayer) {
+        if (player === currentPlayer && !winner) {
             setSelectedCard(card);
         }
     };
 
     // Function to place a card on the board
     const placeCardOnBoard = (rowIndex, colIndex) => {
-        if (!selectedCard) return;
+        if (!selectedCard || winner) return;
 
         const updatedBoard = [...board];
 
@@ -78,22 +77,22 @@ function App() {
             } else {
                 setBluePlayerCards(bluePlayerCards.filter((card) => card !== selectedCard));
             }
+
             // Capture adjacent cards based on values
             captureAdjacentCards(rowIndex, colIndex, selectedCard);
 
             if(isBoardFull()){
                 const result = determineWinner();
                 setWinner(result);
-            }
-            else{
-                //Reset the selected card and switch turns
+            } else {
+                // Reset the selected card and switch turns
                 setSelectedCard(null);
                 setCurrentPlayer(currentPlayer === 'red' ? 'blue' : 'red');
             }
         }
     };
 
-    const captureAdjacentCards = (row,col,card) => {
+    const captureAdjacentCards = (row, col, card) => {
         const directions = [
             { row: -1, col: 0, checkValue: 'top', compareValue: 'bottom' }, // Up
             { row: 1, col: 0, checkValue: 'bottom', compareValue: 'top' },   // Down
@@ -102,7 +101,7 @@ function App() {
         ];
 
         const updatedBoard = [...board];
-        for (const { row: rowDir,   col: colDir, checkValue, compareValue } of directions) {
+        for (const { row: rowDir, col: colDir, checkValue, compareValue } of directions) {
             const newRow = row + rowDir;
             const newCol = col + colDir;
 
@@ -121,9 +120,11 @@ function App() {
         }
         setBoard(updatedBoard); // Update the board with captured cards
     };
+
     const isBoardFull = () => {
         return board.every(row => row.every(cell => cell !== null)); // Checks if all cells are filled
     };
+
     const determineWinner = () => {
         let redCount = 0;
         let blueCount = 0;
@@ -148,31 +149,36 @@ function App() {
 
     return (
         <div className="App">
-            <h1>3x3 Card Game Board</h1>
-            {winner && <h2 className="winner-message">{winner}</h2>}
-            <h2>Current Player: <span className={currentPlayer}>{currentPlayer.toUpperCase()}</span>
-            </h2>
+            <h1>Newgrounds Card Clash</h1>
+            <div className="current-player">
+                Current Player: <span className={currentPlayer}>{currentPlayer.toUpperCase()}</span>
+            </div>
 
+            {winner && <div className="winner-message">{winner}</div>}
 
-            {/* Game Container to hold the red player, board, and blue player */}
             <div className="game-container">
-
                 {/* Red Player's Cards Container */}
                 <div className="players-cards-container red-player">
                     <h2>Red Player's Cards</h2>
-                    {redPlayerCards.map((card, index) => (
-                        <div key={index} onClick={() => handleCardClick(card, 'red')}>
-                        <Card
-                            top={card.top}
-                            left={card.left}
-                            right={card.right}
-                            bottom={card.bottom}
-                            owner={card.owner}
-                            isFlipped={currentPlayer === 'blue'}
-                            image = {card.image}
-                        />
-                        </div>
-                    ))}
+                    <div className="player-cards-wrapper">
+                        {redPlayerCards.map((card, index) => (
+                            <div
+                                key={index}
+                                onClick={() => handleCardClick(card, 'red')}
+                            >
+                                <Card
+                                    top={card.top}
+                                    left={card.left}
+                                    right={card.right}
+                                    bottom={card.bottom}
+                                    owner={card.owner}
+                                    isSelected={selectedCard === card}
+                                    isFlipped={currentPlayer === 'blue'}
+                                    image={card.image}
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Board Container */}
@@ -195,19 +201,25 @@ function App() {
                 {/* Blue Player's Cards Container */}
                 <div className="players-cards-container blue-player">
                     <h2>Blue Player's Cards</h2>
-                    {bluePlayerCards.map((card, index) => (
-                        <div key={index} onClick={() => handleCardClick(card, 'blue')}>
-                            <Card
-                                top={card.top}
-                                left={card.left}
-                                right={card.right}
-                                bottom={card.bottom}
-                                owner={card.owner}
-                                isFlipped={currentPlayer === 'red'}
-                                image = {card.image}
-                            />
-                        </div>
-                    ))}
+                    <div className="player-cards-wrapper">
+                        {bluePlayerCards.map((card, index) => (
+                            <div
+                                key={index}
+                                onClick={() => handleCardClick(card, 'blue')}
+                            >
+                                <Card
+                                    top={card.top}
+                                    left={card.left}
+                                    right={card.right}
+                                    bottom={card.bottom}
+                                    owner={card.owner}
+                                    isSelected={selectedCard === card}
+                                    isFlipped={currentPlayer === 'red'}
+                                    image={card.image}
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

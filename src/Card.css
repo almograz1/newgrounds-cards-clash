@@ -1,132 +1,135 @@
 /* src/Card.css */
-:root  {
-    --card-width: 80px;
-    --card-height: 100px;
+:root {
+    --card-width: 70px;
+    --card-height: 90px;
 }
-
 
 .card {
     position: relative;
     width: var(--card-width);
     height: var(--card-height);
-    background-color: white; /* white background */
-    border: 3px solid #444; /* Slightly darker border */
-    border-radius: 12px; /* Rounded corners */
+    background-color: #1e2837;
+    border: 2px solid #344966;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px;
+    margin: 5px;
     font-family: 'Poppins', sans-serif;
-    font-size: 18px;
     font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     cursor: pointer;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-
+    overflow: visible; /* Allow values to appear outside */
 }
 
 
-
-.card {
-    transition: transform 0.2s ease-in-out;
-}
-
-.card-content{
+.card-content {
     position: relative;
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-image {
-    width:100%;
-    height:auto;
-    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    position: relative; /* Set image behind the card values */
+    z-index: 1; /* Lower z-index to be behind the card values */
 }
 
 .card:not(.placed):hover {
-    transform: translateX(-13px);
-}
-.card:hover{
-    transform: translateY(-8px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Enhances shadow on hover */
-}
-/* Styling for each value displayed on the card */
-.value {
-    position: absolute;
-    font-weight: bold;
-    font-size: 18px;
-    color: #333; /* Dark text */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
 }
 
-.card-values {
-    position: absolute;
-    top:5px;
-    left:5px;
-    background: rgba(0, 0, 0, 0.7); /* Dark background for contrast */
-    color: white;
-    padding: 4px 6px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    aling-items: center;
-    justify-content: center;
-    gap: 2px;
-}
-
+/* Individual card values */
 .card-value {
     position: absolute;
+    width: 13px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: bold;
+    background-color: rgba(44, 62, 80, 0.9); /* Dark transparent */
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    z-index: 3; /* Ensure values appear above everything */
+}
+/* Position the value circles absolutely within the card */
+.card-values {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Ensure card values are above the image */
 }
 
+/* Position each value at its respective edge */
 .card-value.top {
-    position: absolute;
-    top: -7px;
-    left: 61%;
-    transform: translateX(-50%);
-}
-
-.card-value.bottom {
-    position: absolute;
-    bottom: -23px;
-    left: 61%;
-    transform: translateX(-50%);
-}
-
-.card-value.left {
-    position: absolute;
-    left: 0px;
-    top:50%;
+    top: -15px;
+    left: 50%;
     transform: translateX(-50%);
 }
 
 .card-value.right {
-    position: absolute;
-    right: -11px;
-    top:50%;
+    top: 50%;
+    right: -15px;
+    transform: translateY(-50%);
+}
+
+.card-value.bottom {
+    bottom: -15px;
+    left: 50%;
     transform: translateX(-50%);
 }
 
-
-
-
-
-
-.card-back {
-    color: currentColor;
-    font-size: small;
-    text-align: center;
+.card-value.left {
+    top: 50%;
+    left: -15px;
+    transform: translateY(-50%);
 }
 
-/* Styling for player ownership */
+.card-back {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    text-align: center;
+    padding: 8px;
+    background: linear-gradient(135deg, #2c3e50, #1e2837);
+    color: #b0b0b0;
+}
+
+/* Player ownership styling */
 .card.blue {
-    background-color: #a0d2eb; /* Lighter blue */
-    border-color: #00509e; /* Darker blue border */
-    color: #003366; /* Darker text */
+    border-color: #1f3a8e;
+    background: linear-gradient(to bottom, #1e3c72, #2a5298);
 }
 
 .card.red {
-    background-color: #f5a4a4; /* Light red */
-    border-color: #d62828; /* Darker red */
-    color: #660000; /* Darker text */
+    border-color: #8e1f1f;
+    background: linear-gradient(to bottom, #721e1e, #982a2a);
+}
+
+/* Add a subtle glow effect for selected cards */
+.card.selected {
+    box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.5);
+}
+
+/* Special color for card values based on player */
+.card.blue .card-value {
+    background-color: #114f9e;
+}
+
+.card.red .card-value {
+    background-color: #9e1111;
 }

@@ -1,13 +1,14 @@
 import React from 'react';
 import './Card.css'; // Import CSS for styling the card
 
-function Card({ top, left, right, bottom, owner, isFlipped, placed, image }) {
+function Card({ top, left, right, bottom, owner, isFlipped, placed, image, isSelected }) {
     return (
-        <div className={`card ${owner} ${placed ? 'placed' : ''}`}>
+        <div className={`card ${owner} ${placed ? 'placed' : ''} ${isSelected ? 'selected' : ''}`}>
             {
                 isFlipped ? (
                     <div className="card-back">
-                        <p>Newgrounds Card Game</p>
+                        <p>Newgrounds</p>
+                        <p>Card Clash</p>
                     </div>
                 ) : (
                     <div className="card-content">
