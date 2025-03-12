@@ -1,4 +1,4 @@
-# Cards Game
+# Welcome to The Newgrounds Card Clash!
 
 A turn-based card game implemented in React, featuring a dynamic 3x3 board and unique card interactions. This repository contains the source code and assets for the project.
 
