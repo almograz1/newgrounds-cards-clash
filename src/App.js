@@ -14,8 +14,17 @@ function App() {
     // Function to render the content of each cell on the board
     const renderCellContent = (cell) => {
         if (!cell) return null;
+        const backgroundClass = cell.owner === 'red' ? 'red-filled' : 'blue-filled';
+        const glowClass = cell.owner === currentPlayer
+            ? cell.owner === 'red'
+                ? 'red-glow'
+                : 'blue-glow'
+            : '';
+        const winnerGlowClass = winner ? (cell.owner === 'red' && winner.includes("Red")) ? 'winner-red-glow'
+            : (cell.owner === 'blue' && winner.includes("Blue")) ? 'winner-blue-glow': '': '';
 
         return (
+            <div className = {`card-container ${backgroundClass} ${glowClass} ${winnerGlowClass}`}>
             <Card
                 top={cell.top}
                 left={cell.left}
@@ -25,6 +34,7 @@ function App() {
                 placed={true}
                 image={cell.image}
             />
+            </div>
         );
     };
 
@@ -50,7 +60,7 @@ function App() {
 
     // Track the currently selected card and player turn
     const [selectedCard, setSelectedCard] = useState(null);
-    const [currentPlayer, setCurrentPlayer] = useState('red'); // 'red' starts the game
+    let [currentPlayer, setCurrentPlayer] = useState('red'); // 'red' starts the game
 
     // Function to handle card selection
     const handleCardClick = (card, player) => {
@@ -84,6 +94,7 @@ function App() {
             if(isBoardFull()){
                 const result = determineWinner();
                 setWinner(result);
+                setCurrentPlayer(result);
             } else {
                 // Reset the selected card and switch turns
                 setSelectedCard(null);
