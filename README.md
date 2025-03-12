@@ -2,6 +2,8 @@
 
 A turn-based card game implemented in React, featuring a dynamic 3x3 board and unique card interactions. This repository contains the source code and assets for the project.
 
+![Game Demo](demo.gif)
+
 ## Current Status
 
 This project is currently in the "early-mid development stage**. Progress is ongoing, but updates may be infrequent due to mid-semester time constraints.
