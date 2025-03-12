@@ -1,18 +1,18 @@
-# Cards Game
+# Welcome to The Newgrounds Card Clash!
 
 A turn-based card game implemented in React, featuring a dynamic 3x3 board and unique card interactions. This repository contains the source code and assets for the project.
 
 ## Current Status
 
-This project is currently in the **early-mid development stage**. Progress is ongoing, but updates may be infrequent due to mid-semester time constraints.
+This project is currently in the "early-mid development stage**. Progress is ongoing, but updates may be infrequent due to mid-semester time constraints.
 
 ## Features
 
-- **Turn-Based Gameplay**: Players take turns placing cards on a 3x3 board.
-- **Card Mechanics**: Cards interact with adjacent cards based on their values.
-- **Dynamic Capture Rules**: Opponent cards can be captured depending on their values.
-- **Interactive Design**: Includes hover effects and scrollable containers for cards.
-- **React Architecture**: Built using reusable React components for scalability.
+- **Turn-Based Gameplay**: Players take turns placing cards on a 3x3 board. 
+- **Card Mechanics**: Each card has four values (top, left, right, bottom). Cards placed on the board can capture adjacent opponent cards if their values are higher in the corresponding direction. 
+- **Dynamic Capture Rules**: The board state updates dynamically to reflect captured cards.
+- **Win Condition & Board Full Detection**: The game ends when all 9 cells are filled. The winner is determined based on who has more occupied cards on the board.
+- **React Architecture**: The game is built using React functional components. The board, player hands, and turn-based logic are all managed using React state (useState). The UI updates dynamically as players place cards.
 
 ## Installation and Setup
 
