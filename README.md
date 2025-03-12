@@ -1,5 +1,5 @@
 <div align="center">
-  <h1 style="color:#ffcc00; font-size: 36px;">⚡ Welcome to The Newgrounds Card Clash! ⚡</h1>
+  <h1 style="color:#ffcc00; font-size: 36px;">🃏 Welcome to The Newgrounds Card Clash! 🃏</h1>
 </div>
 
 A turn-based card game implemented in React, featuring a dynamic 3x3 board and unique card interactions. This repository contains the source code and assets for the project.
